@@ -10,7 +10,7 @@ html {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden !important;
   background-color: #1a1a1a;
   font-family: 'Pixelify Sans', sans-serif;
@@ -21,7 +21,7 @@ html {
 #root,
 #app {
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   margin: 0;
   padding: 0;
   display: flex;
@@ -169,7 +169,7 @@ html {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   z-index: 10;
   overflow: hidden;
   background: #1a1a1a;
@@ -216,7 +216,7 @@ html {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
@@ -318,7 +318,7 @@ html {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background: #000;
   color: #fff;
   z-index: 9999;
