@@ -1,0 +1,51 @@
+<svg width="1024" height="512" viewBox="0 0 1024 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="100%" stop-color="#E0F7FA"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky Area (Top 220px) -->
+  <rect width="1024" height="220" fill="url(#sky)"/>
+
+  <!-- Scenery: Mountains/Trees -->
+  <path d="M0,220 L150,100 L300,220 Z" fill="#A5D6A7" opacity="0.8"/>
+  <path d="M200,220 L400,80 L600,220 Z" fill="#81C784" opacity="0.9"/>
+  <path d="M500,220 L750,120 L1024,220 Z" fill="#66BB6A"/>
+
+  <!-- Fence / Railing Separator -->
+  <rect y="210" width="1024" height="10" fill="#EEEEEE" stroke="#BDBDBD" stroke-width="1"/>
+  <path d="M10,210 v10 M60,210 v10 M110,210 v10 M160,210 v10 M210,210 v10 M260,210 v10 M310,210 v10 M360,210 v10 M410,210 v10 M460,210 v10 M510,210 v10 M560,210 v10 M610,210 v10 M660,210 v10 M710,210 v10 M760,210 v10 M810,210 v10 M860,210 v10 M910,210 v10 M960,210 v10 M1010,210 v10" stroke="#BDBDBD" stroke-width="2"/>
+
+  <!-- Track Area (Bottom 292px) - 5 Lanes -->
+  <!-- Total Track Height: 512 - 220 = 292 -->
+  <!-- Lane Height: ~58px each -->
+
+  <!-- Lane 1 (Top) -->
+  <rect y="220" width="1024" height="58" fill="#D35400"/>
+  <rect y="220" width="1024" height="58" fill="rgba(0,0,0,0.05)"/> <!-- Slightly darker pattern -->
+
+  <!-- Lane 2 -->
+  <rect y="278" width="1024" height="58" fill="#E67E22"/>
+
+  <!-- Lane 3 -->
+  <rect y="336" width="1024" height="58" fill="#D35400"/>
+  <rect y="336" width="1024" height="58" fill="rgba(0,0,0,0.05)"/>
+
+  <!-- Lane 4 -->
+  <rect y="394" width="1024" height="58" fill="#E67E22"/>
+
+  <!-- Lane 5 (Bottom) -->
+  <rect y="452" width="1024" height="60" fill="#D35400"/>
+  <rect y="452" width="1024" height="60" fill="rgba(0,0,0,0.05)"/>
+
+  <!-- Lane Dividers (White Lines) -->
+  <line x1="0" y1="278" x2="1024" y2="278" stroke="white" stroke-width="2" stroke-dasharray="10,5" opacity="0.7"/>
+  <line x1="0" y1="336" x2="1024" y2="336" stroke="white" stroke-width="2" stroke-dasharray="10,5" opacity="0.7"/>
+  <line x1="0" y1="394" x2="1024" y2="394" stroke="white" stroke-width="2" stroke-dasharray="10,5" opacity="0.7"/>
+  <line x1="0" y1="452" x2="1024" y2="452" stroke="white" stroke-width="2" stroke-dasharray="10,5" opacity="0.7"/>
+
+  <!-- Start/Finish Line Indicator Texture at end (Right side usually) -->
+  <!-- Just texture -->
+</svg>

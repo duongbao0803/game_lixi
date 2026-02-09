@@ -1,0 +1,22 @@
+<svg width="100" height="80" viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Minimalist Running Horse Silhouette -->
+  <!-- Body -->
+  <path d="M20,60 C20,50 15,45 15,45 L10,50 L5,45 C5,45 10,40 15,40 L15,35 C15,35 15,25 25,25 L40,20 C40,20 50,15 60,20 L75,25 C75,25 80,30 80,40 C80,50 75,55 70,55 L65,60 M65,40 L70,30"
+        fill="white" stroke="black" stroke-width="2"/>
+
+  <!-- Head -->
+  <path d="M75,25 Q80,15 85,15 L95,20 Q90,30 85,30 Z" fill="white" stroke="black" stroke-width="2"/>
+
+  <!-- Mane -->
+  <path d="M70,18 Q75,10 65,12 L60,18 Z" fill="black"/>
+
+  <!-- Legs (stylized run) -->
+  <path d="M25,50 L20,70 L25,75" stroke="black" stroke-width="3" fill="none"/>
+  <path d="M35,50 L30,65 L35,70" stroke="black" stroke-width="3" fill="none" opacity="0.8"/>
+
+  <path d="M60,50 L65,70 L60,75" stroke="black" stroke-width="3" fill="none"/>
+  <path d="M50,50 L55,65 L60,65" stroke="black" stroke-width="3" fill="none" opacity="0.8"/>
+
+  <!-- Tail -->
+  <path d="M15,35 Q5,35 5,50" stroke="black" stroke-width="2" fill="none"/>
+</svg>

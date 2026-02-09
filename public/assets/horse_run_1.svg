@@ -1,0 +1,44 @@
+<svg width="64" height="48" viewBox="0 0 64 48" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+  <!-- Pixel Art Horse (Gallop Frame 2) -->
+
+  <!-- Back Leg (Far) -->
+  <rect x="14" y="34" width="4" height="8" fill="#5D4037" />
+  <rect x="10" y="40" width="4" height="6" fill="#5D4037" />
+
+  <!-- Front Leg (Far) -->
+  <rect x="40" y="34" width="4" height="8" fill="#5D4037" />
+  <rect x="44" y="40" width="4" height="6" fill="#5D4037" />
+
+  <!-- Tail (Up) -->
+  <rect x="4" y="24" width="6" height="4" fill="#3E2723" />
+  <rect x="2" y="28" width="4" height="6" fill="#3E2723" />
+
+  <!-- Body (Compressed slightly) -->
+  <rect x="12" y="22" width="36" height="12" fill="#8D6E63" />
+
+  <!-- Back Leg (Near) -->
+  <rect x="18" y="38" width="4" height="10" fill="#8D6E63" />
+  <rect x="16" y="46" width="4" height="4" fill="#3E2723" />
+
+  <!-- Front Leg (Near) -->
+  <rect x="38" y="38" width="4" height="6" fill="#8D6E63" />
+  <rect x="42" y="42" width="4" height="8" fill="#8D6E63" />
+  <rect x="46" y="48" width="4" height="4" fill="#3E2723" />
+
+  <!-- Head/Neck -->
+  <rect x="40" y="16" width="10" height="10" fill="#8D6E63" />
+  <rect x="46" y="12" width="12" height="8" fill="#8D6E63" />
+  <rect x="50" y="14" width="2" height="2" fill="#3E2723" />
+
+  <!-- Mane -->
+  <rect x="40" y="10" width="8" height="6" fill="#3E2723" />
+
+  <!-- Jockey -->
+  <rect x="24" y="16" width="10" height="8" fill="#F0F0F0" />
+  <rect x="26" y="10" width="6" height="6" fill="#FFCC80" />
+  <rect x="26" y="8" width="6" height="2" fill="#1976D2" />
+  <rect x="32" y="10" width="2" height="2" fill="#1976D2" />
+
+  <!-- Saddle Cloth -->
+  <rect x="20" y="22" width="12" height="8" fill="#1565C0" />
+</svg>

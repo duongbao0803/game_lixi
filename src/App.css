@@ -1,0 +1,390 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap');
+
+/* Reset and Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden !important;
+  background-color: #1a1a1a;
+  font-family: 'Pixelify Sans', sans-serif;
+  color: #fff;
+  position: fixed;
+}
+
+#root,
+#app {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Auth Screen Scaling */
+.auth-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: clamp(15px, 4vh, 40px);
+  border: 4px solid #fff;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2vh, 20px);
+  max-width: 400px;
+  width: 90%;
+  max-height: 95vh;
+  image-rendering: pixelated;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.auth-container h1 {
+  font-weight: 700;
+  color: #f1c40f;
+  text-shadow: 3px 3px #e74c3c;
+  margin-bottom: 5px;
+  font-size: clamp(1.2rem, 5vh, 2rem);
+  letter-spacing: 1px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: clamp(10px, 2vh, 15px);
+  border: 4px solid #fff;
+  background: #000;
+  color: #0f0;
+  font-size: clamp(14px, 2.5vh, 20px);
+  outline: none;
+  font-family: inherit;
+}
+
+.start-btn {
+  padding: clamp(12px, 2.5vh, 20px);
+  border: 4px solid #fff;
+  background: #e74c3c;
+  color: white;
+  font-weight: 700;
+  font-size: clamp(1rem, 3vh, 1.5rem);
+  box-shadow: 4px 4px 0px #c0392b;
+  cursor: pointer;
+}
+
+/* Lobby Scaling */
+.lobby {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(5px, 1.5vh, 15px);
+  background: rgba(0, 0, 0, 0.88);
+  padding: clamp(10px, 2vh, 25px);
+  border: 4px solid #fff;
+  width: 95vw;
+  max-width: 850px;
+  max-height: 92vh;
+  backdrop-filter: blur(5px);
+  overflow-y: auto; /* Fallback for tiny screens */
+}
+
+.lobby h2 {
+  font-size: clamp(1.1rem, 4vh, 1.8rem);
+  text-shadow: 2px 2px #3498db;
+  margin: 0;
+}
+
+.lobby p {
+  margin: 2px 0;
+  font-size: clamp(0.8rem, 2vh, 1.1rem);
+}
+
+.horse-selection.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(5px, 1.5vw, 15px);
+  width: 100%;
+}
+
+.horse-btn {
+  width: clamp(75px, 14vw, 130px);
+  height: clamp(75px, 14vw, 130px);
+  padding: 5px;
+  border: 4px solid #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: white;
+  font-family: inherit;
+  transition: all 0.1s ease;
+}
+
+.horse-btn:hover {
+  transform: translate(2px, 2px);
+  border-color: #f1c40f;
+}
+
+.horse-img-wrapper {
+  height: 60%;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.horse-icon-img {
+  height: 100%;
+  width: auto;
+  image-rendering: pixelated;
+}
+
+/* Grid Colors */
+.horse-btn.horse-0 {
+  background: #e74c3c;
+}
+.horse-btn.horse-1 {
+  background: #3498db;
+}
+.horse-btn.horse-2 {
+  background: #f1c40f;
+  color: #000;
+}
+.horse-btn.horse-3 {
+  background: #2ecc71;
+}
+.horse-btn.horse-4 {
+  background: #9b59b6;
+}
+
+/* Game Wrapper */
+.game-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+#game-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#game-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  /* Object-fit is not needed with Scale.RESIZE, but width/height 100% IS */
+}
+
+/* Countdown */
+.countdown-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 50;
+  pointer-events: none;
+}
+.countdown-number {
+  font-size: clamp(80px, 25vh, 200px);
+  color: #f1c40f;
+  text-shadow: 6px 6px #c0392b;
+}
+
+/* Result Popup Scaling - SUPER COMPACT */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.popup {
+  background: #2c3e50;
+  padding: clamp(8px, 1.5vh, 25px);
+  border: 4px solid #f1c40f;
+  width: clamp(280px, 95vw, 650px);
+  max-height: 98vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.popup h2 {
+  font-size: clamp(1rem, 4vh, 2.5rem);
+  margin: 0 0 5px 0;
+  color: #f1c40f;
+  text-shadow: 2px 2px #c0392b;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.leaderboard {
+  width: 100%;
+  background: #000;
+  border: 2px solid #fff;
+  padding: 4px;
+  margin-bottom: 5px;
+  flex-grow: 1;
+  overflow: hidden; /* NO SCROLLING */
+  display: flex;
+  flex-direction: column;
+}
+
+.leaderboard-row {
+  display: flex;
+  justify-content: space-between;
+  padding: clamp(3px, 0.8vh, 10px);
+  font-size: clamp(0.65rem, 1.8vh, 1.1rem);
+  border-bottom: 1px dashed #444;
+}
+
+.leaderboard-row.header {
+  color: #f1c40f;
+  border-bottom: 2px solid #f1c40f;
+}
+.leaderboard-row.highlight {
+  background: #333;
+  color: #f1c40f;
+  border-left: 4px solid #f1c40f;
+}
+
+.reward-info {
+  width: 100%;
+  background: #000;
+  padding: clamp(4px, 1.2vh, 12px);
+  border: 2px solid #f1c40f;
+  margin: 4px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reward-amount {
+  font-weight: 700;
+  color: #2ecc71;
+  font-size: clamp(0.9rem, 3vh, 1.8rem);
+}
+
+.result-content p {
+  font-size: clamp(0.6rem, 1.5vh, 0.9rem);
+  margin: 2px 0;
+  opacity: 0.8;
+}
+
+.restart-btn {
+  padding: clamp(8px, 1.5vh, 15px) clamp(25px, 6vw, 50px);
+  background: #27ae60;
+  color: white;
+  border: 4px solid #fff;
+  font-size: clamp(0.7rem, 2.2vh, 1.3rem);
+  font-weight: 700;
+  box-shadow: 3px 3px 0 #1e8449;
+  margin-top: clamp(5px, 1.2vh, 15px);
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+/* Orientation Warning */
+.landscape-warning {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  color: #fff;
+  z-index: 9999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: inherit;
+  padding: 20px;
+}
+
+@media screen and (orientation: portrait) {
+  .landscape-warning {
+    display: flex;
+  }
+}
+
+/* Custom Driver JS Synchronization */
+.game-driver-popover {
+  background-color: #2c3e50 !important;
+  color: #fff !important;
+  font-family: 'Pixelify Sans', sans-serif !important;
+  border: 4px solid #f1c40f !important;
+  border-radius: 0 !important;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5) !important;
+  padding: 20px !important;
+}
+
+.driver-popover-title {
+  font-family: 'Pixelify Sans', sans-serif !important;
+  font-weight: 700 !important;
+  color: #f1c40f !important;
+  font-size: 22px !important;
+  margin-bottom: 10px !important;
+  text-shadow: 2px 2px #c0392b !important;
+}
+
+.driver-popover-description {
+  font-family: 'Pixelify Sans', sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.4 !important;
+  color: #fff !important;
+}
+
+.driver-popover-footer {
+  margin-top: 15px !important;
+}
+
+.driver-popover-footer button {
+  background-color: #27ae60 !important;
+  color: white !important;
+  border: 3px solid #fff !important;
+  border-radius: 0 !important;
+  font-family: 'Pixelify Sans', sans-serif !important;
+  font-weight: 700 !important;
+  padding: 8px 16px !important;
+  text-shadow: none !important;
+  box-shadow: 4px 4px 0 #145a32 !important;
+  transition: all 0.1s !important;
+}
+
+.driver-popover-footer button:hover {
+  transform: translate(1px, 1px) !important;
+  box-shadow: 2px 2px 0 #145a32 !important;
+}
+
+.driver-popover-close-btn {
+  color: #fff !important;
+}
