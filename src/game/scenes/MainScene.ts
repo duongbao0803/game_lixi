@@ -192,7 +192,7 @@ export class MainScene extends Scene {
     const playerHorse = this.horses[this.playerHorseIndex] as any;
     if (!playerHorse) return;
     playerHorse.speed += 1.1;
-    if (playerHorse.speed > 10.5) playerHorse.speed = 10.5;
+    if (playerHorse.speed > 8) playerHorse.speed = 8;
 
     const burst = this.add.circle(playerHorse.x, playerHorse.y, 30, 0xffff00, 0.5);
     this.tweens.add({

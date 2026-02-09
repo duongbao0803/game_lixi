@@ -145,7 +145,7 @@ function App() {
   useEffect(() => {
     const handleOrientation = () => {
       const isLandscape = window.innerWidth > window.innerHeight;
-      if (isLandscape && gameState !== 'auth') {
+      if (isLandscape) {
         // User has already interacted (logged in), so we can request FS
         triggerFullScreen();
       } else if (!isLandscape) {
@@ -155,9 +155,21 @@ function App() {
 
     window.addEventListener('resize', handleOrientation);
     window.addEventListener('orientationchange', handleOrientation);
+
+    // Catch the very first touch to force FS if in landscape
+    const firstTouch = () => {
+      handleOrientation();
+      window.removeEventListener('touchstart', firstTouch);
+      window.removeEventListener('click', firstTouch);
+    };
+    window.addEventListener('touchstart', firstTouch);
+    window.addEventListener('click', firstTouch);
+
     return () => {
       window.removeEventListener('resize', handleOrientation);
       window.removeEventListener('orientationchange', handleOrientation);
+      window.removeEventListener('touchstart', firstTouch);
+      window.removeEventListener('click', firstTouch);
     };
   }, [gameState]);
 
