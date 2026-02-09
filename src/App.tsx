@@ -122,17 +122,44 @@ function App() {
     }
   }, [gameState]);
 
-  const triggerFullScreen = () => {
-    if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen();
-    } else if ((document.documentElement as any).webkitRequestFullscreen) {
-      /* Safari */
-      (document.documentElement as any).webkitRequestFullscreen();
-    } else if ((document.documentElement as any).msRequestFullscreen) {
-      /* IE11 */
-      (document.documentElement as any).msRequestFullscreen();
+  const exitFullScreen = () => {
+    if (document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    } else if ((document as any).webkitExitFullscreen) {
+      (document as any).webkitExitFullscreen();
     }
   };
+
+  const triggerFullScreen = () => {
+    // Only attempt if not already full
+    if (!document.fullscreenElement && !(document as any).webkitFullscreenElement) {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else if ((document.documentElement as any).webkitRequestFullscreen) {
+        (document.documentElement as any).webkitRequestFullscreen();
+      }
+    }
+  };
+
+  // Orientation auto-fullscreen logic
+  useEffect(() => {
+    const handleOrientation = () => {
+      const isLandscape = window.innerWidth > window.innerHeight;
+      if (isLandscape && gameState !== 'auth') {
+        // User has already interacted (logged in), so we can request FS
+        triggerFullScreen();
+      } else if (!isLandscape) {
+        exitFullScreen();
+      }
+    };
+
+    window.addEventListener('resize', handleOrientation);
+    window.addEventListener('orientationchange', handleOrientation);
+    return () => {
+      window.removeEventListener('resize', handleOrientation);
+      window.removeEventListener('orientationchange', handleOrientation);
+    };
+  }, [gameState]);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();

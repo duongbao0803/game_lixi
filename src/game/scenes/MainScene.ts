@@ -191,8 +191,9 @@ export class MainScene extends Scene {
     if (!this.isRacing || this.finishedHorses.includes(this.playerHorseIndex)) return;
     const playerHorse = this.horses[this.playerHorseIndex] as any;
     if (!playerHorse) return;
-    playerHorse.speed += 1.4;
-    if (playerHorse.speed > 12) playerHorse.speed = 12;
+    playerHorse.speed += 1.1;
+    if (playerHorse.speed > 10.5) playerHorse.speed = 10.5;
+
     const burst = this.add.circle(playerHorse.x, playerHorse.y, 30, 0xffff00, 0.5);
     this.tweens.add({
       targets: burst,
