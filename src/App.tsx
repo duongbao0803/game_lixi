@@ -143,35 +143,35 @@ function App() {
 
   // Orientation auto-fullscreen logic
   useEffect(() => {
-    const handleOrientation = () => {
+    const checkFS = () => {
       const isLandscape = window.innerWidth > window.innerHeight;
       if (isLandscape) {
-        // User has already interacted (logged in), so we can request FS
         triggerFullScreen();
-      } else if (!isLandscape) {
+      } else {
         exitFullScreen();
       }
     };
 
-    window.addEventListener('resize', handleOrientation);
-    window.addEventListener('orientationchange', handleOrientation);
-
-    // Catch the very first touch to force FS if in landscape
-    const firstTouch = () => {
-      handleOrientation();
-      window.removeEventListener('touchstart', firstTouch);
-      window.removeEventListener('click', firstTouch);
+    const handleGlobalInteraction = () => {
+      checkFS();
     };
-    window.addEventListener('touchstart', firstTouch);
-    window.addEventListener('click', firstTouch);
+
+    window.addEventListener('resize', checkFS);
+    window.addEventListener('orientationchange', checkFS);
+    // Any interaction anywhere on the screen should trigger FS if landscape
+    window.addEventListener('click', handleGlobalInteraction);
+    window.addEventListener('touchstart', handleGlobalInteraction);
+
+    // Initial check
+    checkFS();
 
     return () => {
-      window.removeEventListener('resize', handleOrientation);
-      window.removeEventListener('orientationchange', handleOrientation);
-      window.removeEventListener('touchstart', firstTouch);
-      window.removeEventListener('click', firstTouch);
+      window.removeEventListener('resize', checkFS);
+      window.removeEventListener('orientationchange', checkFS);
+      window.removeEventListener('click', handleGlobalInteraction);
+      window.removeEventListener('touchstart', handleGlobalInteraction);
     };
-  }, [gameState]);
+  }, []); // Run only once to handle global behavior
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
