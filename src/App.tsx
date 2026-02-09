@@ -122,6 +122,18 @@ function App() {
     }
   }, [gameState]);
 
+  const triggerFullScreen = () => {
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if ((document.documentElement as any).webkitRequestFullscreen) {
+      /* Safari */
+      (document.documentElement as any).webkitRequestFullscreen();
+    } else if ((document.documentElement as any).msRequestFullscreen) {
+      /* IE11 */
+      (document.documentElement as any).msRequestFullscreen();
+    }
+  };
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (user.email && user.account) {
@@ -129,6 +141,7 @@ function App() {
         alert('Tài khoản này đã tham gia đua rồi. Mỗi tài khoản chỉ được đua 1 lần!');
         return;
       }
+      triggerFullScreen();
       setGameState('lobby');
     } else {
       alert('Vui lòng điền đầy đủ thông tin!');
@@ -136,6 +149,7 @@ function App() {
   };
 
   const startGame = (index: number) => {
+    triggerFullScreen();
     setPlayerHorseIndex(index);
     setGameState('tutorial');
   };
