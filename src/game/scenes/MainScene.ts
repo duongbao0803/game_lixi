@@ -19,7 +19,7 @@ export class MainScene extends Scene {
   }
 
   preload() {
-    this.load.svg('background', 'assets/bg.svg', { width: 1024, height: 512 });
+    this.load.image('background', 'assets/racing-lanes.png');
     this.load.svg('horse_run_0', 'assets/horse_run_0.svg', { width: 128, height: 80 });
     this.load.svg('horse_run_1', 'assets/horse_run_1.svg', { width: 128, height: 80 });
     this.load.svg('horse_run_2', 'assets/horse_run_2.svg', { width: 128, height: 80 });
@@ -54,20 +54,30 @@ export class MainScene extends Scene {
       repeat: -1,
     });
 
-    // Backgrounds - tiling to cover full width
-    for (let i = 0; i < 6; i++) {
+    // Backgrounds - tiling to cover full width dynamically
+    const bgTexture = this.textures.get('background');
+    const imgWidth = (bgTexture.getSourceImage() as any).width || 1024;
+    const imgHeight = (bgTexture.getSourceImage() as any).height || 512;
+
+    // Scale background to fit screen height
+    const bgScale = this.gameHeight / imgHeight;
+    const scaledWidth = imgWidth * bgScale;
+    const bgCount = Math.ceil(this.trackLength / scaledWidth) + 1;
+
+    for (let i = 0; i < bgCount; i++) {
       this.add
-        .image(i * 1024, 0, 'background')
+        .image(i * scaledWidth, 0, 'background')
         .setOrigin(0, 0)
-        .setDisplaySize(1024, this.gameHeight);
+        .setDisplaySize(scaledWidth, this.gameHeight);
     }
 
     // Finish Line
     this.finishLineX = this.trackLength - 200;
     const finishLineGroup = this.add.group();
 
-    // Relative start Y for the track (approx 40% down)
-    const trackStartY = this.gameHeight * 0.4;
+    // Adjusted track area for racing-lanes.png
+    // The lanes in typical racing backgrounds start around 30-40% height
+    const trackStartY = this.gameHeight * 0.35;
     const trackHeight = this.gameHeight - trackStartY;
 
     for (let i = trackStartY; i < this.gameHeight; i += 20) {
@@ -86,12 +96,13 @@ export class MainScene extends Scene {
     const saddleColors = [0xe74c3c, 0x3498db, 0xf1c40f, 0x2ecc71, 0x9b59b6];
 
     for (let i = 0; i < 5; i++) {
+      // Offset Y slightly to center better within visual lanes
       const laneY = trackStartY + laneHeight * (i + 0.5);
       const horseContainer = this.add.container(startX, laneY);
       const horseSprite = this.add.sprite(0, 0, 'horse_run_0');
 
-      // Scale horse relative to lane height (approx 80% of lane)
-      const targetScale = (laneHeight * 0.8) / 80;
+      // Slightly larger horses (95% of lane height)
+      const targetScale = (laneHeight * 0.95) / 80;
       horseSprite.setScale(targetScale);
       horseSprite.setName('horseSprite');
 

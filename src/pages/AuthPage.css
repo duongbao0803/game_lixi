@@ -1,0 +1,419 @@
+/* Base Auth Styles */
+.auth-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: clamp(15px, 4vh, 40px);
+  border: 4px solid #fff;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2vh, 20px);
+  max-width: 400px;
+  width: 90%;
+  max-height: 95vh;
+  image-rendering: pixelated;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.auth-container h1 {
+  font-weight: 700;
+  color: #f1c40f;
+  text-shadow: 3px 3px #e74c3c;
+  margin-bottom: 5px;
+  font-size: clamp(1.2rem, 5vh, 1.35rem);
+  letter-spacing: 1px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: clamp(10px, 2vh, 15px);
+  border: 4px solid #fff;
+  background: #000;
+  color: #0f0;
+  font-size: max(16px, clamp(14px, 2.5vh, 20px)); /* Prevent iOS zoom */
+  outline: none;
+  font-family: inherit;
+  user-select: text !important; /* Allow selection */
+  -webkit-user-select: text !important;
+}
+
+.start-btn {
+  padding: clamp(12px, 2.5vh, 20px);
+  border: 4px solid #fff;
+  background: #e74c3c;
+  color: white;
+  font-weight: 700;
+  box-shadow: 4px 4px 0px #c0392b;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 5vh, 1rem);
+}
+
+/* --- Tet Holiday Theme --- */
+
+.auth-screen {
+  width: 100vw;
+  height: 100vh;
+  /* Remove background from here to scale it independently */
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* New background element for independent scaling */
+.auth-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/background.png'); /* Adjusted path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  transform-origin: center 15%;
+  transition: transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Animation only runs when intro is done */
+  transform: scale(1.5); /* Stay zoomed in by default */
+  opacity: 0; /* Keep hidden until intro is done */
+  transition:
+    transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.5s ease;
+}
+
+.auth-screen.intro-done .auth-background {
+  opacity: 1;
+  animation: bgEnter 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes bgEnter {
+  from {
+    transform: scale(1.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes bgZoomIn {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.5);
+  }
+}
+
+.auth-screen.zoom-active .auth-background {
+  animation: bgZoomIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Overlay to darken background slightly if needed */
+.auth-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1; /* Above background, below content */
+  opacity: 0; /* HIDDEN initially */
+  transition: opacity 1s ease;
+}
+
+.auth-screen.intro-done::before {
+  animation: overlayEnter 1.5s ease-out 0.5s forwards;
+}
+
+@keyframes overlayEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Fade out the overlay too so it looks like entering the world */
+.auth-screen.zoom-active::before {
+  opacity: 0;
+}
+
+/* Layer to handle content fade independently from background */
+.auth-content-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.6s ease-in;
+  /* Start hidden and animate in after intro */
+  opacity: 0;
+  pointer-events: none;
+}
+
+.auth-screen.intro-done .auth-content-layer {
+  pointer-events: auto;
+  animation: contentEnter 0.8s ease-out 1.2s forwards;
+}
+
+@keyframes contentEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.auth-screen.zoom-active .auth-content-layer {
+  animation: contentExit 0.6s ease-in forwards !important;
+  pointer-events: none;
+}
+
+@keyframes contentExit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+}
+
+.auth-container.tet-theme {
+  position: relative;
+  /* z-index is handled by parent layer now */
+  background: rgba(160, 0, 0, 0.85); /* Tet Red */
+  border: 4px solid #f1c40f; /* Gold */
+  border-radius: 12px;
+  box-shadow:
+    0 0 15px rgba(241, 196, 15, 0.6),
+    8px 8px 0 rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  /* transform logic can move to the container purely for visual effect if needed,
+     but opacity is now on the layer */
+  transition: transform 0.6s ease-in;
+}
+
+.auth-screen.zoom-active .auth-container.tet-theme {
+  transform: scale(0.9) translateY(20px);
+}
+
+.auth-container.tet-theme h1 {
+  color: #f1c40f;
+  text-shadow: 2px 2px 0 #8b0000;
+  font-family: 'Pacifico', cursive;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  word-wrap: break-word; /* Ensure long text wraps */
+  text-align: center;
+  font-size: clamp(1.2rem, 5vh, 1.3rem);
+}
+
+.auth-container.tet-theme .input-group input {
+  background: #fff;
+  border: 3px solid #f1c40f;
+  border-radius: 8px;
+  color: #d32f2f; /* Red text */
+  font-weight: 400; /* Pacifico is naturally bold */
+  font-family: 'Pacifico', cursive;
+  font-size: 1.1rem !important;
+}
+
+/* Suffix wrapper looks like the input */
+.auth-container.tet-theme .suffix-wrapper {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 3px solid #f1c40f;
+  border-radius: 8px;
+  overflow: hidden;
+  padding-right: 15px; /* Space for suffix */
+}
+
+/* Reset input inside wrapper */
+.auth-container.tet-theme .suffix-wrapper input.input-with-suffix {
+  border: none !important;
+  background: transparent !important;
+  width: 100%;
+  flex: 1;
+}
+
+.auth-container.tet-theme .suffix-wrapper input.input-with-suffix:focus {
+  outline: none;
+}
+.email-suffix {
+  color: #d32f2f; /* Match input text color */
+  font-family: 'Pacifico', cursive;
+  font-size: 1.1rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.auth-container.tet-theme .input-group input::placeholder {
+  color: #ff8a80;
+  font-family: 'Pacifico', cursive;
+  font-weight: 400; /* Sync with input */
+  font-size: 1rem;
+}
+
+.auth-container.tet-theme .start-btn {
+  background: linear-gradient(to bottom, #f1c40f, #f39c12);
+  color: #8b0000;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 #b7950b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Pacifico', cursive;
+  font-weight: 400; /* Pacifico is bold by default */
+}
+
+.auth-container.tet-theme .start-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #b7950b;
+}
+
+.auth-container.tet-theme .start-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #b7950b;
+}
+
+.auth-container.tet-theme .start-btn:disabled {
+  filter: grayscale(0.5) brightness(0.8);
+  cursor: wait;
+  pointer-events: none;
+  box-shadow: 0 2px 0 #8b0000;
+  transform: translateY(2px);
+}
+
+/* Falling Blossoms */
+.falling-petals {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+  animation-name: fall-sway;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.petal.type-1 {
+  width: 15px;
+  height: 15px;
+  background-color: #ffb7b2; /* Peach pink */
+  border-radius: 50% 0 50% 50%;
+}
+
+.petal.type-2 {
+  width: 12px;
+  height: 12px;
+  background-color: #ffd700; /* Apricot yellow */
+  border-radius: 50%;
+}
+
+@keyframes fall-sway {
+  0% {
+    transform: translateY(-5vh) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(25vh) translateX(30px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(50vh) translateX(-30px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(75vh) translateX(30px) rotate(270deg);
+  }
+  100% {
+    transform: translateY(105vh) translateX(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Intro Video */
+.intro-video-container {
+  width: 100vw;
+  height: 100dvh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* background: #000;  <-- REMOVED TO ALLOW SEE-THROUGH */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(1.2); /* Subtle zoom out start */
+  animation: videoEnter 1s ease-out forwards;
+}
+
+@keyframes videoEnter {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.intro-video-container.fade-out {
+  background-color: #000;
+}
+
+/* When fading out, we fade the VIDEO content, but keep the container BLACK
+   so it transitions smoothly to the next page's black start */
+.intro-video-container.fade-out .intro-video,
+.intro-video-container.fade-out .skip-btn {
+  opacity: 0;
+  transform: scale(1.5); /* Zoom in effect before exit */
+  transition:
+    opacity 0.5s ease-in,
+    transform 0.5s ease-in;
+}
+
+.intro-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.skip-btn {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: 2px solid #fff;
+  font-family: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10000;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.skip-btn:hover {
+  background: #fff;
+  color: #000;
+}

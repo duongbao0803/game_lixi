@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Festive&family=Nunito:wght@400;600;700&family=Pacifico&family=Pixelify+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+VN:wght@100..400&family=VT323&display=swap&subset=latin,latin-ext,vietnamese');
 
 /* Reset and Global Styles */
 * {
@@ -12,8 +12,8 @@ html {
   width: 100vw;
   height: 100dvh;
   overflow: hidden !important;
-  background-color: #1a1a1a;
-  font-family: 'Pixelify Sans', sans-serif;
+  background-color: #000;
+  font-family: 'Pixelify Sans', 'VT323', monospace;
   color: #fff;
   position: fixed;
 }
@@ -28,53 +28,6 @@ html {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-}
-
-/* Auth Screen Scaling */
-.auth-container {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  padding: clamp(15px, 4vh, 40px);
-  border: 4px solid #fff;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(10px, 2vh, 20px);
-  max-width: 400px;
-  width: 90%;
-  max-height: 95vh;
-  image-rendering: pixelated;
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5);
-}
-
-.auth-container h1 {
-  font-weight: 700;
-  color: #f1c40f;
-  text-shadow: 3px 3px #e74c3c;
-  margin-bottom: 5px;
-  font-size: clamp(1.2rem, 5vh, 2rem);
-  letter-spacing: 1px;
-}
-
-.input-group input {
-  width: 100%;
-  padding: clamp(10px, 2vh, 15px);
-  border: 4px solid #fff;
-  background: #000;
-  color: #0f0;
-  font-size: clamp(14px, 2.5vh, 20px);
-  outline: none;
-  font-family: inherit;
-}
-
-.start-btn {
-  padding: clamp(12px, 2.5vh, 20px);
-  border: 4px solid #fff;
-  background: #e74c3c;
-  color: white;
-  font-weight: 700;
-  font-size: clamp(1rem, 3vh, 1.5rem);
-  box-shadow: 4px 4px 0px #c0392b;
-  cursor: pointer;
 }
 
 /* Lobby Scaling */
@@ -344,11 +297,12 @@ html {
   border: 4px solid #f1c40f !important;
   border-radius: 0 !important;
   box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5) !important;
+  font-family: 'Pixelify Sans', 'VT323', monospace !important;
   padding: 20px !important;
 }
 
 .driver-popover-title {
-  font-family: 'Pixelify Sans', sans-serif !important;
+  font-family: 'Pixelify Sans', 'VT323', monospace !important;
   font-weight: 700 !important;
   color: #f1c40f !important;
   font-size: 22px !important;
@@ -357,7 +311,7 @@ html {
 }
 
 .driver-popover-description {
-  font-family: 'Pixelify Sans', sans-serif !important;
+  font-family: 'Pixelify Sans', 'VT323', monospace !important;
   font-size: 16px !important;
   line-height: 1.4 !important;
   color: #fff !important;
@@ -372,7 +326,7 @@ html {
   color: white !important;
   border: 3px solid #fff !important;
   border-radius: 0 !important;
-  font-family: 'Pixelify Sans', sans-serif !important;
+  font-family: 'Pixelify Sans', 'VT323', monospace !important;
   font-weight: 700 !important;
   padding: 8px 16px !important;
   text-shadow: none !important;
@@ -385,6 +339,21 @@ html {
   box-shadow: 2px 2px 0 #145a32 !important;
 }
 
+/* Existing code... */
 .driver-popover-close-btn {
   color: #fff !important;
+}
+
+/* Game Page Transition */
+.game-entry-animation {
+  animation: gameFadeIn 1.5s ease-out forwards;
+}
+
+@keyframes gameFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
