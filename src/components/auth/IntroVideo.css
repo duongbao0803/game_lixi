@@ -1,0 +1,61 @@
+.intro-video-container {
+  width: 100vw;
+  height: 100dvh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(1.2);
+  animation: videoEnter 1s ease-out forwards;
+}
+
+@keyframes videoEnter {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.intro-video-container.fade-out {
+  pointer-events: none;
+}
+
+.intro-video-container.fade-out .intro-video,
+.intro-video-container.fade-out .skip-btn {
+  opacity: 0;
+  transform: scale(2.5); /* Deep 'into-the-screen' zoom effect */
+  transition:
+    opacity 1s ease-in,
+    transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.intro-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.skip-btn {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  padding: 10px 20px;
+  background: var(--color-shadow-dark);
+  color: var(--color-white);
+  border: 2px solid var(--color-white);
+  font-family: 'Pacifico', cursive;
+  font-size: 0.8rem;
+  cursor: pointer;
+  z-index: 10000;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.skip-btn:hover {
+  background: var(--color-white);
+  color: #000;
+}

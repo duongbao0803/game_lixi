@@ -76,8 +76,8 @@ export class MainScene extends Scene {
     const finishLineGroup = this.add.group();
 
     // Adjusted track area for racing-lanes.png
-    // The lanes in typical racing backgrounds start around 30-40% height
-    const trackStartY = this.gameHeight * 0.35;
+    // The lanes start lower down, after the pagoda and railing
+    const trackStartY = this.gameHeight * 0.48;
     const trackHeight = this.gameHeight - trackStartY;
 
     for (let i = trackStartY; i < this.gameHeight; i += 20) {
@@ -132,7 +132,7 @@ export class MainScene extends Scene {
         horseSprite.on('pointerdown', () => this.boostPlayer());
 
         const tapText = this.add
-          .text(0, -laneHeight * 0.5, 'TAP!', {
+          .text(0, -laneHeight * 0.6, 'TAP!', {
             fontSize: `${Math.max(14, 18 * targetScale)}px`,
             color: '#ffff00',
             stroke: '#000000',
